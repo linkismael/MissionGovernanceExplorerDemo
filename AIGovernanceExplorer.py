@@ -15,15 +15,24 @@ st.set_page_config(
 # --- COMPACT RESPONSIVE CSS STYLING ---
 st.markdown("""
 <style>
-    .stApp { background-color: #0E1117; color: #FFFFFF; }
+/* --- HIDE STREAMLIT TOP HEADER BAR & WHITE STRIP --- */
+    header[data-testid="stHeader"] {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0px !important;
+    }
+/* --- Background of overall dashboard colors --- */
+    .stApp { background-color: #FFFFFF; color: #0E1117; }
     .block-container { 
         max-width: 100% !important; 
-        padding-top: 0.5rem; 
+        padding-top: 1rem; 
         padding-bottom: 0.5rem; 
-        padding-left: 1rem; 
-        padding-right: 1rem; 
+        padding-left: 1.5rem; 
+        padding-right: 1.5rem; 
     }
-    div.stButton > button { 
+/* --- color scenario tabs --- */
+    /* Uniform Button Styling */
+        div.stButton > button { 
         background-color: #1F77B4; 
         color: white; 
         border-radius: 4px; 
@@ -31,13 +40,33 @@ st.markdown("""
         border: none;
         font-weight: 600;
     }
-    .metric-card { 
-        background-color: #161B22; 
-        padding: 10px; 
-        border-radius: 8px; 
-        border: 1px solid #30363D; 
-        text-align: center; 
+    div.stButton > button:hover {
+        background-color: #2980b9;
     }
+/* --- color for data tabs --- */
+    /* --- TABS: Same color background, Red frame around active --- */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 12px;
+        background-color: #0E1117;
+        padding: 4px;
+    }
+    .stTabs [data-baseweb="tab"] {
+        height: 40px;
+        background-color: #161B22 !important;
+        border-radius: 6px;
+        color: #C9D1D9 !important;
+        font-weight: 600;
+        font-size: 13px;
+        border: 1px solid #30363D !important;
+        padding: 0px 18px;
+    }
+    .stTabs [aria-selected="true"] {
+        background-color: #FFFFFF !important;
+        color: #161B22 !important;
+        border: 2px solid #FF4B4B !important;
+        box-shadow: none !important;
+    }
+
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
 </style>
@@ -79,7 +108,8 @@ baseline_summary = summary_df[summary_df['Scenario_Order'] == 1].iloc[0]
 # =========================================================================
 # ZONE 1: TOP CONTROL BAR & GLOBAL KPI METRICS (Persistent across tabs)
 # =========================================================================
-st.markdown("### 🛡️ AI Mission Governance Explorer — Analytical Decision Dashboard")
+# --- ZONE 1: TOP CONTROL BAR & GLOBAL KPI METRICS ---
+st.markdown("## 🛡️ AI Mission Governance Explorer")
 
 scenario_names = {
     1: "S1: Traditional Automation",
@@ -92,31 +122,38 @@ scenario_names = {
 cols_nav = st.columns(5)
 for i, (scen_num, scen_label) in enumerate(scenario_names.items()):
     with cols_nav[i]:
-        btn_type = "primary" if active_scen_order == scen_num else "secondary"
-        if st.button(scen_label, key=f"btn_scen_{scen_num}", type=btn_type):
-            st.session_state['active_scenario'] = scen_num
-            st.rerun()
+        is_active = (active_scen_order == scen_num)
+        
+        # Red accent indicator frame/bar for active scenario
+        if is_active:
+            st.markdown("<div style='height: 3px; background-color: #FF4B4B; border-radius: 2px; margin-bottom: 2px;'></div>", unsafe_allow_html=True)
+        else:
+            st.markdown("<div style='height: 3px; background-color: transparent; margin-bottom: 2px;'></div>", unsafe_allow_html=True)
+            
+        if st.button(scen_label, key=f"btn_scen_{scen_num}"):
+            if active_scen_order != scen_num:
+                st.session_state['active_scenario'] = scen_num
+                st.rerun()
 
-st.markdown("")
+
 
 # KPI Metric Cards
-kpi1, kpi2, kpi3, kpi4 = st.columns(4)
+k1, k2, k3, k4 = st.columns(4)
 
 resp_diff = int(current_summary['Mission_Response_Time_Sec'] - baseline_summary['Mission_Response_Time_Sec'])
 esc_diff = int(current_summary['Human_Escalation_Count'] - baseline_summary['Human_Escalation_Count'])
 gov_diff = int(current_summary['Peak_Human_Oversight_Load_Pct'] - baseline_summary['Peak_Human_Oversight_Load_Pct'])
 it_diff = int(current_summary['Peak_IT_System_Load_Pct'] - baseline_summary['Peak_IT_System_Load_Pct'])
 
-with kpi1:
-    st.metric("Mission Response Time", f"{current_summary['Mission_Response_Time_Sec']} sec", f"{resp_diff}s vs S1", delta_color="inverse")
-with kpi2:
-    st.metric("Human Escalation Count", f"{current_summary['Human_Escalation_Count']}", f"{esc_diff} vs S1", delta_color="inverse")
-with kpi3:
-    st.metric("Peak Human Oversight Load", f"{current_summary['Peak_Human_Oversight_Load_Pct']}%", f"{gov_diff}% vs S1", delta_color="inverse")
-with kpi4:
-    st.metric("Peak IT System Load", f"{current_summary['Peak_IT_System_Load_Pct']}%", f"{it_diff}% vs S1", delta_color="normal")
+with k1:
+    st.markdown(f"<span style='color: #161B22; font-size: 15px;'>Response:</span> <b style='color: #161B22; font-size: 15px;'>{current_summary['Mission_Response_Time_Sec']}s</b> <span style='color: #161B22; font-size: 15px;'>({resp_diff:+d}s)</span>", unsafe_allow_html=True)
+with k2:
+    st.markdown(f"<span style='color: #161B22; font-size: 15px;'>Escalations:</span> <b style='color: #161B22; font-size: 15px;'>{current_summary['Human_Escalation_Count']}</b> <span style='color: #161B22; font-size: 15px;'>({esc_diff:+d})</span>", unsafe_allow_html=True)
+with k3:
+    st.markdown(f"<span style='color: #161B22; font-size: 15px;'>Oversight Load:</span> <b style='color: #161B22; font-size: 15px;'>{current_summary['Peak_Human_Oversight_Load_Pct']}%</b> <span style='color: #161B22; font-size: 15px;'>({gov_diff:+d}%)</span>", unsafe_allow_html=True)
+with k4:
+    st.markdown(f"<span style='color: #161B22; font-size: 15px;'>IT Load:</span> <b style='color: #161B22; font-size: 15px;'>{current_summary['Peak_IT_System_Load_Pct']}%</b> <span style='color: #161B22; font-size: 15px;'>({it_diff:+d}%)</span>", unsafe_allow_html=True)
 
-st.markdown("---")
 
 # =========================================================================
 # TABBED ARCHITECTURE TO ELIMINATE VERTICAL SCROLLING -- 
@@ -137,7 +174,7 @@ with tab_topology:
     col_graph, col_inspect = st.columns([70, 30])
 
     with col_graph:
-        st.markdown(f"#### 🌐 Topology Map — {current_summary['Scenario_Name']}")
+        st.markdown(f"#### 🌐︎ Topology Map — {current_summary['Scenario_Name']}")
         
         G = nx.DiGraph()
         for _, node in active_nodes.iterrows():
@@ -212,7 +249,7 @@ with tab_topology:
                         margin=dict(b=10, l=10, r=10, t=10),
                         xaxis=dict(showgrid=False, zeroline=False, showticklabels=False, range=[0, 1]),
                         yaxis=dict(showgrid=False, zeroline=False, showticklabels=False, range=[0.3, 5.7]),
-                        plot_bgcolor='#0E1117',
+                        plot_bgcolor='#FFFFFF',
                         paper_bgcolor='#0E1117',
                         height=540  # Perfectly proportioned to fit standard screens without scrolling
                     ))
