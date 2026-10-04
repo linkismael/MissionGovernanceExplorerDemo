@@ -1,0 +1,6 @@
+Scenario_ID,Scenario_Name,Scenario_Order,Mission_Response_Time_Sec,Human_Escalation_Count,Escalation_Latency_Sec,Peak_Human_Oversight_Load_Pct,Peak_IT_System_Load_Pct,Bottleneck_Type,Bottleneck_Node_ID,Outcome_Status
+S1,Traditional Automation,1,180,4,60,85,30,Human Governance,N001,Baseline Active
+S2,Generative AI,2,120,3,40,65,45,Supervisory / Assurance,N006,Accelerated
+S3,Agentic AI,3,75,2,20,45,60,Agent Coordination,N010,Optimized
+S4,Multi-Agent AI,4,35,1,10,30,85,IT / Processing,N021,High Throughput
+S5,Autonomous AI Ecosystem,5,12,0,2,15,95,IT / Processing,N025,Near-Instant

@@ -1,0 +1,51 @@
+ID,Source_ID,Target_ID,Type,Description,Direction,Scenario_Start,Scenario_Start_Order,Scenario_End,Scenario_End_Order,Oversight_Type,Criticality
+R001,N002,N001,Govern,Human governance authority establishes oversight boundaries for the mission commander.,Directed,Traditional Automation,1,Autonomous AI Ecosystem,5,Human Governance,High
+R002,N003,N005,Govern,Policy and compliance authority constrains direct human operation in lower-autonomy scenarios.,Directed,Traditional Automation,1,Generative AI,2,Human Policy,High
+R003,N001,N005,Command,Mission commander directs the human operator in the traditional operating model.,Directed,Traditional Automation,1,Generative AI,2,Human Direct,High
+R004,N005,N018,Command,Human operator directly commands routing automation.,Directed,Traditional Automation,1,Generative AI,2,Human Direct,High
+R005,N005,N019,Command,Human operator directly commands task scheduling automation.,Directed,Traditional Automation,1,Generative AI,2,Human Direct,High
+R006,N005,N020,Command,Human operator directly initiates resource allocation actions.,Directed,Traditional Automation,1,Generative AI,2,Human Direct,High
+R007,N021,N017,DataFlow,Imagery sensor sends observations to the decision support model.,Directed,Traditional Automation,1,Generative AI,2,Automated Data Flow,Medium
+R008,N023,N020,DataFlow,Logistics data feed supplies the resource allocation model.,Directed,Traditional Automation,1,Autonomous AI Ecosystem,5,Automated Data Flow,Medium
+R009,N024,N017,DataFlow,Mission data repository supplies context to the decision support model.,Directed,Traditional Automation,1,Autonomous AI Ecosystem,5,Automated Data Flow,Medium
+R010,N017,N004,Recommend,Decision support model provides recommendations to the human analyst.,Directed,Traditional Automation,1,Generative AI,2,Human Review,Medium
+R011,N004,N001,Recommend,Human analyst advises the mission commander across all scenarios.,Directed,Traditional Automation,1,Autonomous AI Ecosystem,5,Human Review,High
+R012,N003,N016,Govern,Policy and compliance authority constrains use of the generative AI system.,Directed,Generative AI,2,Agentic AI,3,Human Policy,High
+R013,N004,N016,Command,Human analyst issues requests to the generative AI system.,Directed,Generative AI,2,Generative AI,2,Human Direct,Medium
+R014,N024,N016,DataFlow,Mission data repository supplies approved context to the generative AI system.,Directed,Generative AI,2,Autonomous AI Ecosystem,5,Automated Data Flow,Medium
+R015,N025,N016,DataFlow,External information feed supplies broader context to the generative AI system.,Directed,Generative AI,2,Autonomous AI Ecosystem,5,Automated Data Flow,Medium
+R016,N022,N016,DataFlow,Environmental observations are available to the generative AI system in early AI-assisted workflows.,Directed,Generative AI,2,Agentic AI,3,Automated Data Flow,Low
+R017,N016,N004,Recommend,Generative AI system synthesizes information and recommends options to the human analyst.,Directed,Generative AI,2,Autonomous AI Ecosystem,5,Human Review,Medium
+R018,N005,N016,Monitor,Human operator monitors generative AI activity during the initial assisted scenario.,Directed,Generative AI,2,Generative AI,2,Human Monitoring,Medium
+R019,N009,N016,Validate,Validation AI checks generative outputs before they are used downstream.,Directed,Generative AI,2,Autonomous AI Ecosystem,5,AI Validation,High
+R020,N016,N005,Escalate,Generative AI system returns unresolved operational exceptions to the human operator.,Directed,Generative AI,2,Generative AI,2,Human Escalation,High
+R021,N016,N017,ShareInfo,Generative AI system shares synthesized context with the decision support model.,Directed,Generative AI,2,Agentic AI,3,AI Assisted,Medium
+R022,N001,N010,Command,Mission commander delegates mission intent to the mission agent.,Directed,Agentic AI,3,Agentic AI,3,Human Delegation,High
+R023,N003,N010,Govern,Policy and compliance authority directly constrains the mission agent during the initial agentic scenario.,Directed,Agentic AI,3,Agentic AI,3,Human Policy,High
+R024,N004,N010,Monitor,Human analyst monitors mission-agent reasoning and outputs during the initial agentic scenario.,Directed,Agentic AI,3,Agentic AI,3,Human Monitoring,High
+R025,N010,N011,Command,Mission agent delegates planning tasks to the planning agent.,Directed,Agentic AI,3,Agentic AI,3,AI Delegation,High
+R026,N010,N020,Command,Mission agent directly tasks the resource allocation model before multi-agent specialization.,Directed,Agentic AI,3,Agentic AI,3,AI Delegation,Medium
+R027,N024,N010,DataFlow,Mission data repository provides approved mission context to the mission agent.,Directed,Agentic AI,3,Autonomous AI Ecosystem,5,Automated Data Flow,High
+R028,N016,N010,Recommend,Generative AI system provides synthesized context to the mission agent.,Directed,Agentic AI,3,Autonomous AI Ecosystem,5,AI Assisted,Medium
+R029,N009,N010,Validate,Validation AI checks mission-agent outputs before further execution.,Directed,Agentic AI,3,Autonomous AI Ecosystem,5,AI Validation,High
+R030,N010,N001,Escalate,Mission agent returns unresolved mission-level exceptions to the mission commander.,Directed,Agentic AI,3,Agentic AI,3,Human Escalation,High
+R031,N011,N018,Command,Planning agent directs routing automation based on approved plans.,Directed,Agentic AI,3,Autonomous AI Ecosystem,5,AI Delegation,Medium
+R032,N001,N006,Govern,Mission commander shifts from direct machine supervision to governing the supervisory AI layer.,Directed,Multi-Agent AI,4,Autonomous AI Ecosystem,5,Human Governance,High
+R033,N006,N010,Command,Supervisory AI delegates mission activity to the mission agent.,Directed,Multi-Agent AI,4,Autonomous AI Ecosystem,5,AI Governance,High
+R034,N010,N015,Command,Mission agent delegates cross-agent synchronization to the coordination agent.,Directed,Multi-Agent AI,4,Autonomous AI Ecosystem,5,AI Delegation,High
+R035,N015,N011,Coordinate,Coordination agent synchronizes planning activity with other specialized agents.,Directed,Multi-Agent AI,4,Autonomous AI Ecosystem,5,AI Coordination,Medium
+R036,N015,N012,Coordinate,Coordination agent synchronizes collection activity.,Directed,Multi-Agent AI,4,Autonomous AI Ecosystem,5,AI Coordination,Medium
+R037,N015,N013,Coordinate,Coordination agent synchronizes analysis activity.,Directed,Multi-Agent AI,4,Autonomous AI Ecosystem,5,AI Coordination,Medium
+R038,N015,N014,Coordinate,Coordination agent synchronizes logistics activity.,Directed,Multi-Agent AI,4,Autonomous AI Ecosystem,5,AI Coordination,Medium
+R039,N021,N012,DataFlow,Imagery sensor sends observations to the collection agent.,Directed,Multi-Agent AI,4,Autonomous AI Ecosystem,5,Automated Data Flow,Medium
+R040,N022,N012,DataFlow,Environmental sensor sends observations to the collection agent.,Directed,Multi-Agent AI,4,Autonomous AI Ecosystem,5,Automated Data Flow,Low
+R041,N012,N013,ShareInfo,Collection agent shares gathered information with the analysis agent.,Directed,Multi-Agent AI,4,Autonomous AI Ecosystem,5,AI Coordination,Medium
+R042,N014,N020,Command,Logistics agent directs the resource allocation model.,Directed,Multi-Agent AI,4,Autonomous AI Ecosystem,5,AI Delegation,Medium
+R043,N001,N007,Govern,Mission commander establishes assurance expectations for the autonomous ecosystem.,Directed,Autonomous AI Ecosystem,5,Autonomous AI Ecosystem,5,Human Governance,High
+R044,N002,N007,Govern,Human governance authority sets assurance boundaries and escalation expectations.,Directed,Autonomous AI Ecosystem,5,Autonomous AI Ecosystem,5,Human Governance,High
+R045,N003,N008,Govern,Policy and compliance authority governs the policy AI layer.,Directed,Autonomous AI Ecosystem,5,Autonomous AI Ecosystem,5,Human Policy,High
+R046,N007,N006,Assure,Assurance AI independently checks supervisory AI behavior and governance conditions.,Directed,Autonomous AI Ecosystem,5,Autonomous AI Ecosystem,5,AI Assurance,High
+R047,N008,N006,Govern,Policy AI applies machine-readable governance constraints to supervisory AI decisions.,Directed,Autonomous AI Ecosystem,5,Autonomous AI Ecosystem,5,AI Governance,High
+R048,N006,N007,Report,Supervisory AI reports governance state and exceptions to assurance AI.,Directed,Autonomous AI Ecosystem,5,Autonomous AI Ecosystem,5,AI Assurance,High
+R049,N006,N001,Escalate,Supervisory AI escalates mission-level exceptions to the mission commander.,Directed,Autonomous AI Ecosystem,5,Autonomous AI Ecosystem,5,Human Escalation,High
+R050,N007,N001,Escalate,Assurance AI independently escalates unresolved assurance risk to the mission commander.,Directed,Autonomous AI Ecosystem,5,Autonomous AI Ecosystem,5,Human Escalation,High
