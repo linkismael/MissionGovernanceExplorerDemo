@@ -223,9 +223,13 @@ with tab_topology:
             node_text.append(f"<b>{node_data['Label']}</b><br>Layer: {node_data['Governance_Layer']}")
             
             if node_id == selected_node:
-                node_color.append('#FF4B4B')
+                node_color.append('#9C27B0')  # Purple for selected node
+            elif node_data.get('Criticality') == 'High':
+                node_color.append('#E74C3C')  # Red for High
+            elif node_data.get('Criticality') == 'Medium':
+                node_color.append('#F1C40F')  # Yellow for Medium
             else:
-                node_color.append('#2ECC71' if node_data['Criticality'] == 'Low' else '#F1C40F')
+                node_color.append('#2ECC71')  # Green for Low (and default fallback)
 
         node_trace = go.Scatter(
             x=node_x, y=node_y,
@@ -239,6 +243,7 @@ with tab_topology:
                 size=14,
                 line=dict(width=2, color='#FFFFFF')
             )
+            
         )
 
         fig = go.Figure(data=[edge_trace, node_trace],
@@ -360,4 +365,12 @@ with tab_analytics:
         )
         st.plotly_chart(fig_load, use_container_width=True)
 
+st.markdown("""
+<div style='display: flex; justify-content: center; gap: 25px; background-color: #white; padding: 8px; border-radius: 6px; border: 1px solid #30363D; margin-top: 5px; font-size: 12px; color: #161B22;'>
+    <span><span style='color: #2ECC71; font-size: 14px;'>●</span> <b>Low Criticality</b></span>
+    <span><span style='color: #F1C40F; font-size: 14px;'>●</span> <b>Medium Criticality</b></span>
+    <span><span style='color: #E74C3C; font-size: 14px;'>●</span> <b>High Criticality</b></span>
+    <span><span style='color: #9C27B0; font-size: 14px;'>●</span> <b>Selected Node</b></span>
+</div>
+""", unsafe_allow_html=True)
 # Deployment build sync - Oct 2026
