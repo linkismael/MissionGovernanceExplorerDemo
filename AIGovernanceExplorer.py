@@ -329,8 +329,8 @@ with tab_analytics:
             xaxis_title="Autonomy Scenario",
             yaxis_title="Seconds",
             autosize=True,
-            plot_bgcolor='#0E1117',
-            paper_bgcolor='#0E1117',
+            plot_bgcolor="#FFFFFF",
+            paper_bgcolor="#FFFFFF",
             font=dict(color='white'),
             height=400,
             margin=dict(t=30, b=30, l=30, r=30)
@@ -357,8 +357,8 @@ with tab_analytics:
             xaxis_title="Autonomy Scenario",
             yaxis_title="Peak Load Percentage (%)",
             autosize=True,
-            plot_bgcolor='#0E1117',
-            paper_bgcolor='#0E1117',
+            plot_bgcolor="#FFFFFF",
+            paper_bgcolor="#FFFFFF",
             font=dict(color='white'),
             height=400,
             margin=dict(t=30, b=30, l=30, r=30)
